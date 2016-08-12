@@ -1,0 +1,1003 @@
+<?php
+/**
+ * Template name: homepage
+ *
+ */
+?>
+<?php get_header(); 
+global $post;
+?>
+<div class="banner-wrapper">
+
+<div id="owl-demo" class="owl-carousel">
+
+
+
+<div class="item">
+
+	<img src="<?php the_field('first_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('first_slide_title',54);?></h1>
+
+            <h2><?php the_field('first_slider_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('first_slider_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('second_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('second_slide_title',54);?></h1>
+
+            <h2><?php the_field('second_slide_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('second_slide_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('third_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('third_slide_title',54);?></h1>
+
+            <h2><?php the_field('third_slide_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('third_slide_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('fourth_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('fourth_slide_title',54);?></h1>
+
+            <h2><?php the_field('fourth_slide_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('fourth_slide_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('fifth_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('fifth_slide_title',54);?></h1>
+
+            <h2><?php the_field('fifth_slide_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('fifth_slide_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+
+
+</div>
+
+
+
+</div><!-- banner-wrapper end here --->
+
+
+
+<div class="news-letter-wrap">
+
+	<div class="wrapper-01">
+
+    	<div class="news-letter-sec">
+
+        	<div class="left-news-sec">
+
+            	<h2><span>SUBSCRIBE OUR</span><br />
+
+
+
+EMAIL NEWSLETTER</h2>
+
+            	
+
+            </div>
+
+            <div class="right-news-sec">
+		    <?php echo do_shortcode( '[newsletter_form]' );?>
+
+            	<!--<input type="text" value="EMAIL ADDRESS" onfocus="if(this.value=='EMAIL ADDRESS') this.value=''" onblur="if(this.value=='') this.value='EMAIL ADDRESS'" class="news-letter-bx" />
+
+                <button class="submit-btn"><img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/email-arrow.png" alt="" width="39" height="19" /></button>-->
+
+            	
+
+            </div>
+
+        </div><!-- news-letter-sec end here --->
+
+    </div><!--- wrapper-01 end here --->
+
+</div><!--- news-letter-end here --->
+
+
+
+<?php $featured_posts = $wpdb->get_results( "select * from $wpdb->posts where post_type='featured-posts' AND post_status = 'publish' ORDER BY post_date DESC LIMIT 1", ARRAY_A );
+?>
+
+<div class="welcome-wrap">
+
+	<div class="wrapper">
+<?php
+foreach($featured_posts as $featured_post) { 
+$p_id = $featured_post["ID"]; 
+$please_select = get_field('to_show_this_post_on_home_page',$p_id);
+
+if($please_select[0] == "Yes"){
+?>
+		<div class="welcome-sec">
+
+        	<div class="welcome-lft-sec">
+
+            	<img src="<?php echo get_field('post_image',$p_id);?>" alt="" width="590" height="542" />
+
+            </div>
+
+            <div class="welcome-rt-sec">
+
+            	<h3>WELCOME TO</h3>
+
+                <h2><?php echo get_field('post_title',$p_id);?></h2>
+
+                <p><?php echo get_field('post_description',$p_id);?></p>
+
+<p><?php echo get_field('post_sub_description',$p_id);?></p>
+
+
+
+<a href="javascript:void(0)" class="read-story-btn">READ FULL STORY</a>
+
+            
+
+            </div>
+
+        </div><!--- welcome-sec end here --->
+<?php } } ?>
+	</div><!--- wrapper end here --->
+
+</div><!-- welcome-wrap end here ---->
+
+
+<?php $cma_thread = $wpdb->get_results( "select * from $wpdb->posts where post_type='cma_thread' AND post_status = 'publish' ORDER BY post_date DESC LIMIT 3", ARRAY_A );
+/* echo "<pre>";
+echo print_r($cma_thread);
+echo "</pre>"; */
+?>
+
+<div class="blog-wrapper">
+
+	<div class="wrapper">
+
+		<div class="blog-sec">
+		<h5>Forum</h5>
+<?php
+$i = 1;
+ foreach($cma_thread as $cma_threadlist) { 
+/* echo "<pre>";
+echo print_r($cma_threadlist);
+echo "</pre>"; */
+//$cma_threadlist['post_content'];
+//echo "hhhhhhhhhhh". $i;
+$cma_post_id = $cma_threadlist["ID"]; 
+?>
+
+
+			<div class="<?php if($i==1){ echo "lft-blog-sec";}?> <?php if($i==2){ echo "rt-blog-sec";}?> <?php if($i==3){ echo "rt-blog-sec";}?>">
+             <div class="blog-image">
+                    	<a href="javascript:void(0)">
+                        <img src="<?php echo get_field('featured_image',$cma_post_id);?>" alt="" width="164" height="155" title="" />
+                        	<span class="arrow-link"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blue-arrow.png" width="52" height="52" /></span>
+                        </a>
+                    </div>
+				<h2><?php echo $cma_threadlist['post_title'];?></h2>
+
+                <div class="update-info">
+
+                	<h3><?php echo $cma_threadlist['post_date'];?> <a href="javascript:void(0)"><?php echo $cma_threadlist['post_author'];?></a></h3>
+
+                </div>
+
+                <h4><?php echo $cma_threadlist['post_content'];?></h4>
+
+<a href="javascript:void(0)" class="<?php if($i==1){ echo "readmore-btn";}?>">READ MORE</a>
+
+            </div>
+<?php $i++; } ?>
+            <!--<div class="rt-blog-sec">
+
+            	<div class="full-width">
+                	<div class="blog-image">
+                    	<a href="javascript:void(0)">
+                        <img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/blog-01.jpg" alt="" width="164" height="155" title="" />
+                        	<span class="arrow-link"><img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/blue-arrow.png" width="52" height="52" /></span>
+                        </a>
+                    </div>
+                    <div class="blog-post">
+                    	<h2>Medical</h2>
+                        <div class="update-info">
+                	<h3>Updated 07.23.16   <a href="javascript:void(0)">Posted by Your Name</a></h3>
+                </div>
+                <p>Your text will come here. Your text will come here. Your 
+text will come here. Your text will come here. Your text 
+will come here. Your text will come here.</p>
+                    </div>
+                </div>
+
+                <div class="full-width">
+                	<div class="blog-image">
+                    	<a href="javascript:void(0)">
+                        <img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/blog-02.jpg" alt="" width="164" height="155" title="" />
+                        	<span class="arrow-link"><img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/blue-arrow.png" width="52" height="52" /></span>
+                        </a>
+                    </div>
+                    <div class="blog-post">
+                    	<h2>Medical</h2>
+                        <div class="update-info">
+                	<h3>Updated 07.23.16   <a href="javascript:void(0)">Posted by Your Name</a></h3>
+                </div>
+                <p>Your text will come here. Your text will come here. Your 
+
+text will come here. Your text will come here. Your text 
+
+will come here. Your text will come here.</p>
+                    </div>
+                </div>
+
+            
+
+            </div>-->
+
+            <div class="btns-wrapper">
+
+            	<a href="javascript:void(0)" class="read-story-btn">READ FULL STORY</a>
+
+                <a href="javascript:void(0)" class="reg-now-btn">REGISTER NOW</a>
+
+            </div>
+
+		</div><!----blog-sec end here ---->
+
+	</div><!---- wrapper end here --->
+
+</div><!--- blog-wrapper end here ---->
+
+
+
+<div class="banner-wrapper-01">
+
+	
+
+<div id="owl-demo-01" class="owl-carousel">
+
+
+
+<div class="item">
+
+	<img src="<?php the_field('first_slide_image',78);?>" alt="" />
+
+	<div class="banner-01">
+
+    <h2><span><?php the_field('first_slide_title',78);?></span></h2>
+
+    <h3><?php the_field('first_slide_description',78);?></h3>
+
+    </div>	
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('second_slide_image',78);?>" alt="" />
+
+	<div class="banner-01">
+
+    <h2><?php the_field('second_slide_title',78);?></h2>
+
+    <h3><?php the_field('second_slide_description',78);?></h3>
+
+    </div>		
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div><!-- banner-wrapper end here --->
+
+<?php $results = $wpdb->get_results( "select * from $wpdb->posts where post_type LIKE 'article' AND post_status LIKE 'publish' ORDER BY post_modified DESC ", ARRAY_A );
+$args = array(
+'post_type' => 'article',
+'posts_per_page' => 50,
+'orderby' => 'date',
+'order' => 'DESC',
+'meta_query' => ''
+);
+$loop = new WP_Query($args); 
+ ?>
+ <?php while ( $loop->have_posts($posts_array) ) : $loop->the_post();
+							$post_article = get_post_custom($post_id); 
+/* echo "<pre>"; 
+ print_r($post_article);
+ echo "</pre>"; */
+ //echo $post_article['article_title'] [0];
+ //echo $post_article['article_image'] [0];
+ //echo $post_article['article_updated_date'] [0];
+ //echo $post_article['article_author_name'] [0];
+ //echo $post_article['article_description'] [0];
+ //echo $post_article['article_sub_description'] [0];
+ 
+							?>
+  <?php endwhile; ?>
+
+<div class="article-wrapper">
+
+	<div class="wrapper">
+
+		<div class="article-sec">
+
+        <h3>Articles</h3>
+
+        <div id="owl-demo-02" class="owl-carousel">
+ <?php while ( $loop->have_posts($posts_array) ) : $loop->the_post();
+							$post_article = get_post_custom($post_id);
+							?>
+        	<div class="item">
+
+        	<div class="article-box">
+
+            	<div class="article-image">
+
+                	<a href="javascript:void(0)">
+
+                    <img src="<?php echo  get_field("article_image",$post_id);?>" alt="" width="362" height="342" />
+
+                    <span class="link-arrow"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blue-arrow.png" alt="" width="52" height="52" /></span>
+
+                    </a>
+
+                </div>
+
+                <div class="heading-box">
+
+                	<div class="lft-heading"><h2><?php echo  $post_article['article_title'] [0];?></h2></div>
+
+                    <div class="rt-heading">
+
+                    	<h5><?php echo  $post_article['article_updated_date'] [0];?><br />
+
+  
+
+<a href="javascript:void(0)"><?php echo  $post_article['article_author_name'] [0];?></a></h5>
+
+                    </div>
+
+                </div>
+
+                <h4><?php echo  $post_article['article_description'] [0];?></h4>
+
+<p><?php echo  $post_article['article_sub_description'] [0];?></p>
+
+            	
+
+            </div>
+
+            </div>
+			 <?php endwhile; ?>
+
+
+
+        </div>
+
+        </div><!--- article-sec end here --->
+
+    </div><!-- wrapper end here --->
+
+</div><!-- article-wrapper end here --->
+
+
+
+<div class="green-wrapper">
+
+	<div class="wrapper">
+
+    	<div class="green-sec">
+
+    		<?php dynamic_sidebar( 'Content Above Footer' ); ?>
+
+        </div><!-- green-sec end here --->
+
+    </div><!-- wrapper end here --->
+
+</div><!--- green-wrapper end here-->
+<?php get_footer(); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+/**
+ * Template name: homepage
+ *
+ */
+?>
+<?php get_header(); 
+global $post;
+?>
+<div class="banner-wrapper">
+
+<div id="owl-demo" class="owl-carousel">
+
+
+
+<div class="item">
+
+	<img src="<?php the_field('first_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('first_slide_title',54);?></h1>
+
+            <h2><?php the_field('first_slider_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('first_slider_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('second_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('second_slide_title',54);?></h1>
+
+            <h2><?php the_field('second_slide_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('second_slide_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('third_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('third_slide_title',54);?></h1>
+
+            <h2><?php the_field('third_slide_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('third_slide_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('fourth_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('fourth_slide_title',54);?></h1>
+
+            <h2><?php the_field('fourth_slide_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('fourth_slide_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('fifth_slide_image',54);?>" alt="" />
+
+		<div class="banner">
+
+        	
+
+        	<h1><?php the_field('fifth_slide_title',54);?></h1>
+
+            <h2><?php the_field('fifth_slide_sub_title',54);?></h2>
+
+<a href="#" class="read-more-btn"><?php the_field('fifth_slide_button_text',54);?></a>
+
+            
+
+	</div>
+
+</div>
+
+
+
+</div>
+
+
+
+</div><!-- banner-wrapper end here --->
+
+
+
+<div class="news-letter-wrap">
+
+	<div class="wrapper-01">
+
+    	<div class="news-letter-sec">
+
+        	<div class="left-news-sec">
+
+            	<h2><span>SUBSCRIBE OUR</span><br />
+
+
+
+EMAIL NEWSLETTER</h2>
+
+            	
+
+            </div>
+
+            <div class="right-news-sec">
+		    <?php echo do_shortcode( '[newsletter_form]' );?>
+
+            	<!--<input type="text" value="EMAIL ADDRESS" onfocus="if(this.value=='EMAIL ADDRESS') this.value=''" onblur="if(this.value=='') this.value='EMAIL ADDRESS'" class="news-letter-bx" />
+
+                <button class="submit-btn"><img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/email-arrow.png" alt="" width="39" height="19" /></button>-->
+
+            	
+
+            </div>
+
+        </div><!-- news-letter-sec end here --->
+
+    </div><!--- wrapper-01 end here --->
+
+</div><!--- news-letter-end here --->
+
+
+
+<?php $featured_posts = $wpdb->get_results( "select * from $wpdb->posts where post_type='featured-posts' AND post_status = 'publish' ORDER BY post_date DESC LIMIT 1", ARRAY_A );
+?>
+
+<div class="welcome-wrap">
+
+	<div class="wrapper">
+<?php
+foreach($featured_posts as $featured_post) { 
+$p_id = $featured_post["ID"]; 
+$please_select = get_field('to_show_this_post_on_home_page',$p_id);
+
+if($please_select[0] == "Yes"){
+?>
+		<div class="welcome-sec">
+
+        	<div class="welcome-lft-sec">
+
+            	<img src="<?php echo get_field('post_image',$p_id);?>" alt="" width="590" height="542" />
+
+            </div>
+
+            <div class="welcome-rt-sec">
+
+            	<h3>WELCOME TO</h3>
+
+                <h2><?php echo get_field('post_title',$p_id);?></h2>
+
+                <p><?php echo get_field('post_description',$p_id);?></p>
+
+<p><?php echo get_field('post_sub_description',$p_id);?></p>
+
+
+
+<a href="javascript:void(0)" class="read-story-btn">READ FULL STORY</a>
+
+            
+
+            </div>
+
+        </div><!--- welcome-sec end here --->
+<?php } } ?>
+	</div><!--- wrapper end here --->
+
+</div><!-- welcome-wrap end here ---->
+
+
+<?php $cma_thread = $wpdb->get_results( "select * from $wpdb->posts where post_type='cma_thread' AND post_status = 'publish' ORDER BY post_date DESC LIMIT 3", ARRAY_A );
+/* echo "<pre>";
+echo print_r($cma_thread);
+echo "</pre>"; */
+?>
+
+<div class="blog-wrapper">
+
+	<div class="wrapper">
+
+		<div class="blog-sec">
+		<h5>Forum</h5>
+<?php
+$i = 1;
+ foreach($cma_thread as $cma_threadlist) { 
+/* echo "<pre>";
+echo print_r($cma_threadlist);
+echo "</pre>"; */
+//$cma_threadlist['post_content'];
+//echo "hhhhhhhhhhh". $i;
+$cma_post_id = $cma_threadlist["ID"]; 
+?>
+
+
+			<div class="<?php if($i==1){ echo "lft-blog-sec";}?> <?php if($i==2){ echo "rt-blog-sec";}?> <?php if($i==3){ echo "rt-blog-sec";}?>">
+             <div class="blog-image">
+                    	<a href="javascript:void(0)">
+                        <img src="<?php echo get_field('featured_image',$cma_post_id);?>" alt="" width="164" height="155" title="" />
+                        	<span class="arrow-link"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blue-arrow.png" width="52" height="52" /></span>
+                        </a>
+                    </div>
+				<h2><?php echo $cma_threadlist['post_title'];?></h2>
+
+                <div class="update-info">
+
+                	<h3><?php echo $cma_threadlist['post_date'];?> <a href="javascript:void(0)"><?php echo $cma_threadlist['post_author'];?></a></h3>
+
+                </div>
+
+                <h4><?php echo $cma_threadlist['post_content'];?></h4>
+
+<a href="javascript:void(0)" class="<?php if($i==1){ echo "readmore-btn";}?>">READ MORE</a>
+
+            </div>
+<?php $i++; } ?>
+            <!--<div class="rt-blog-sec">
+
+            	<div class="full-width">
+                	<div class="blog-image">
+                    	<a href="javascript:void(0)">
+                        <img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/blog-01.jpg" alt="" width="164" height="155" title="" />
+                        	<span class="arrow-link"><img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/blue-arrow.png" width="52" height="52" /></span>
+                        </a>
+                    </div>
+                    <div class="blog-post">
+                    	<h2>Medical</h2>
+                        <div class="update-info">
+                	<h3>Updated 07.23.16   <a href="javascript:void(0)">Posted by Your Name</a></h3>
+                </div>
+                <p>Your text will come here. Your text will come here. Your 
+text will come here. Your text will come here. Your text 
+will come here. Your text will come here.</p>
+                    </div>
+                </div>
+
+                <div class="full-width">
+                	<div class="blog-image">
+                    	<a href="javascript:void(0)">
+                        <img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/blog-02.jpg" alt="" width="164" height="155" title="" />
+                        	<span class="arrow-link"><img src="<?php //echo get_stylesheet_directory_uri(); ?>/images/blue-arrow.png" width="52" height="52" /></span>
+                        </a>
+                    </div>
+                    <div class="blog-post">
+                    	<h2>Medical</h2>
+                        <div class="update-info">
+                	<h3>Updated 07.23.16   <a href="javascript:void(0)">Posted by Your Name</a></h3>
+                </div>
+                <p>Your text will come here. Your text will come here. Your 
+
+text will come here. Your text will come here. Your text 
+
+will come here. Your text will come here.</p>
+                    </div>
+                </div>
+
+            
+
+            </div>-->
+
+            <div class="btns-wrapper">
+
+            	<a href="javascript:void(0)" class="read-story-btn">READ FULL STORY</a>
+
+                <a href="javascript:void(0)" class="reg-now-btn">REGISTER NOW</a>
+
+            </div>
+
+		</div><!----blog-sec end here ---->
+
+	</div><!---- wrapper end here --->
+
+</div><!--- blog-wrapper end here ---->
+
+
+
+<div class="banner-wrapper-01">
+
+	
+
+<div id="owl-demo-01" class="owl-carousel">
+
+
+
+<div class="item">
+
+	<img src="<?php the_field('first_slide_image',78);?>" alt="" />
+
+	<div class="banner-01">
+
+    <h2><span><?php the_field('first_slide_title',78);?></span></h2>
+
+    <h3><?php the_field('first_slide_description',78);?></h3>
+
+    </div>	
+
+</div>
+
+<div class="item">
+
+	<img src="<?php the_field('second_slide_image',78);?>" alt="" />
+
+	<div class="banner-01">
+
+    <h2><?php the_field('second_slide_title',78);?></h2>
+
+    <h3><?php the_field('second_slide_description',78);?></h3>
+
+    </div>		
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div><!-- banner-wrapper end here --->
+
+<?php $results = $wpdb->get_results( "select * from $wpdb->posts where post_type LIKE 'article' AND post_status LIKE 'publish' ORDER BY post_modified DESC ", ARRAY_A );
+$args = array(
+'post_type' => 'article',
+'posts_per_page' => 50,
+'orderby' => 'date',
+'order' => 'DESC',
+'meta_query' => ''
+);
+$loop = new WP_Query($args); 
+ ?>
+ <?php while ( $loop->have_posts($posts_array) ) : $loop->the_post();
+							$post_article = get_post_custom($post_id); 
+/* echo "<pre>"; 
+ print_r($post_article);
+ echo "</pre>"; */
+ //echo $post_article['article_title'] [0];
+ //echo $post_article['article_image'] [0];
+ //echo $post_article['article_updated_date'] [0];
+ //echo $post_article['article_author_name'] [0];
+ //echo $post_article['article_description'] [0];
+ //echo $post_article['article_sub_description'] [0];
+ 
+							?>
+  <?php endwhile; ?>
+
+<div class="article-wrapper">
+
+	<div class="wrapper">
+
+		<div class="article-sec">
+
+        <h3>Articles</h3>
+
+        <div id="owl-demo-02" class="owl-carousel">
+ <?php while ( $loop->have_posts($posts_array) ) : $loop->the_post();
+							$post_article = get_post_custom($post_id);
+							?>
+        	<div class="item">
+
+        	<div class="article-box">
+
+            	<div class="article-image">
+
+                	<a href="javascript:void(0)">
+
+                    <img src="<?php echo  get_field("article_image",$post_id);?>" alt="" width="362" height="342" />
+
+                    <span class="link-arrow"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/blue-arrow.png" alt="" width="52" height="52" /></span>
+
+                    </a>
+
+                </div>
+
+                <div class="heading-box">
+
+                	<div class="lft-heading"><h2><?php echo  $post_article['article_title'] [0];?></h2></div>
+
+                    <div class="rt-heading">
+
+                    	<h5><?php echo  $post_article['article_updated_date'] [0];?><br />
+
+  
+
+<a href="javascript:void(0)"><?php echo  $post_article['article_author_name'] [0];?></a></h5>
+
+                    </div>
+
+                </div>
+
+                <h4><?php echo  $post_article['article_description'] [0];?></h4>
+
+<p><?php echo  $post_article['article_sub_description'] [0];?></p>
+
+            	
+
+            </div>
+
+            </div>
+			 <?php endwhile; ?>
+
+
+
+        </div>
+
+        </div><!--- article-sec end here --->
+
+    </div><!-- wrapper end here --->
+
+</div><!-- article-wrapper end here --->
+
+
+
+<div class="green-wrapper">
+
+	<div class="wrapper">
+
+    	<div class="green-sec">
+
+    		<?php dynamic_sidebar( 'Content Above Footer' ); ?>
+
+        </div><!-- green-sec end here --->
+
+    </div><!-- wrapper end here --->
+
+</div><!--- green-wrapper end here-->
+<?php get_footer(); ?>
