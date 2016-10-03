@@ -1,0 +1,3 @@
+<?php while(has_sub_field('main_field_name')){?>
+<img src="<?php the_sub_field('image')?>" alt="<?php the_sub_field('slide_alt')?>" title="<?php the_sub_field('title')?>" />
+<?phph}?>
